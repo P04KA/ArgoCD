@@ -78,9 +78,7 @@ data:
             {{- if .Values.customPage.showVersion }}
             <p>NGINX version: {{ .Chart.AppVersion }}</p>
             <p>Helm release: {{ .Release.Name }}</p>
-		dsaaaas
-		adasdasdas
-		asdakkf
+	    <h1>asdasd<h1>
             {{- end }}
         </div>
     </body>
