@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-nginx-config
+  labels:
+    app: {{ .Release.Name }}-nginx
+data:
+  nginx.conf: |
+    user  nginx;
+    worker_processes  auto;
+
+    error_log  /var/log/nginx/error.log notice;
+    pid        /var/run/nginx.pid;
+
+    events {
+        worker_connections  1024;
+    }
+
+    http {
+        include       /etc/nginx/mime.types;
+        default_type  application/octet-stream;
+
+        log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                          '$status $body_bytes_sent "$http_referer" '
+                          '"$http_user_agent" "$http_x_forwarded_for"';
+
+        access_log  /var/log/nginx/access.log  main;
+
+        sendfile        on;
+        keepalive_timeout  65;
+
+        server {
+            listen       80;
+            server_name  localhost;
+
+            location / {
+                root   /usr/share/nginx/html;
+                index  index.html index.htm;
+                try_files $uri $uri/ =404;
+            }
+
+            error_page   500 502 503 504  /50x.html;
+            location = /50x.html {
+                root   /usr/share/nginx/html;
+            }
+        }
+    }
+
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>{{ .Values.customPage.title }}</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+                background-color: {{ .Values.customPage.backgroundColor }};
+                color: #333;
+            }
+            .container {
+                margin-top: 100px;
+            }
+            h1 {
+                color: {{ .Values.customPage.titleColor }};
+            }
+            p {
+                font-size: 1.2em;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>{{ .Values.customPage.title }}</h1>
+            <p>{{ .Values.customPage.message }}</p>
+            {{- if .Values.customPage.showVersion }}
+            <p>NGINX version: {{ .Chart.AppVersion }}</p>
+            <p>Helm release: {{ .Release.Name }}</p>
+            {{- end }}
+        </div>
+    </body>
+    </html>

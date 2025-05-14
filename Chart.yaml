@@ -1,0 +1,5 @@
+apiVersion: v2
+name: nginx-helm
+description: Helm chart for NGINX with custom page
+version: 0.1.0
+appVersion: 1.25.3

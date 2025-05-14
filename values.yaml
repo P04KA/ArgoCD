@@ -1,0 +1,25 @@
+replicaCount: 2
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  tag: "1.25.3"
+
+service:
+  type: NodePort
+  port: 80
+
+customPage:
+  title: "My Awesome Page"
+  message: "Deployed with Helm & ArgoCD!"
+  backgroundColor: "#f0f8ff"
+  titleColor: "#4682b4"
+  showVersion: true
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
