@@ -51,31 +51,10 @@ data:
     <html>
     <head>
         <title>{{ .Values.customPage.title }}</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                text-align: center;
-                margin: 0;
-                padding: 0;
-                background-color: {{ .Values.customPage.backgroundColor }};
-                color: #333;
-            }
-            .container {
-                margin-top: 100px;
-            }
-            h1 {
-                color: {{ .Values.customPage.titleColor }};
-            }
-            p {
-                font-size: 1.2em;
-            }
-        </style>
     </head>
     <body>
-        <div class="container">
-            <h1>{{ .Values.customPage.title }}</h1>
-            <p>{{ .Values.customPage.message }}</p>
-            {{- if .Values.customPage.showVersion }}
+            <h1>1</h1>
+            <p></p>
             <p>NGINX versionssssssss: {{ .Chart.AppVersion }}</p>
             <p>Helm release: {{ .Release.Name }}</p>
             {{- end }}
