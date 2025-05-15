@@ -13,6 +13,8 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}-nginx
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
       containers:
       - name: nginx
@@ -23,9 +25,13 @@ spec:
         - name: nginx-config
           mountPath: /etc/nginx/nginx.conf
           subPath: nginx.conf
-        - name: nginx-config
+        - name: nginx-config 
           mountPath: /usr/share/nginx/html/index.html
           subPath: index.html
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "nginx -s reload || true"]
         resources:
           {{- toYaml .Values.resources | nindent 12 }}
       volumes:
