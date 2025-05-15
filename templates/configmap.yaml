@@ -50,14 +50,11 @@ data:
     <!DOCTYPE html>
     <html>
     <head>
-        <title>{{ .Values.customPage.title }}</title>
+        <title>Simple Page</title>
     </head>
     <body>
-            <h1>1</h1>
-            <p></p>
-            <p>NGINX versionssssssss: {{ .Chart.AppVersion }}</p>
-            <p>Helm release: {{ .Release.Name }}</p>
-            {{- end }}
-        </div>
+        <h1>Hello from NGINX!</h1>
+        <p>This is the simplest possible page.</p>
+        <p>Deployed with Helm and ArgoCD</p>
     </body>
     </html>
