@@ -53,8 +53,6 @@ data:
         <title>Simple Page</title>
     </head>
     <body>
-        <h1>Hello from NGINX adsasdasdas1!</h1>
-        <p>This is the simplest possible page.</p>
-        <p>Deployed with Helm and ArgoCD</p>
+        <h1>Hello from NGINXrrrrrrrrrrrrrrrd    555555555555555</h1>
     </body>
     </html>
